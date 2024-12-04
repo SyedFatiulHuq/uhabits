@@ -33,9 +33,10 @@
             android:gravity="center_vertical">
 
         <RadioButton
-                android:id="@+id/everyDayRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:id="@+id/everyDayRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Radiobutton" />
 
         <TextView
                 android:layout_width="wrap_content"
@@ -51,9 +52,10 @@
             android:gravity="center_vertical">
 
         <RadioButton
-                android:id="@+id/everyXDaysRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:id="@+id/everyXDaysRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Radiobutton" />
 
         <EditText
                 android:id="@+id/everyXDaysTextView"
@@ -76,9 +78,10 @@
             android:gravity="center_vertical">
 
         <RadioButton
-                android:id="@+id/xTimesPerWeekRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:id="@+id/xTimesPerWeekRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Radiobutton" />
 
         <EditText
                 android:id="@+id/xTimesPerWeekTextView"
@@ -102,9 +105,10 @@
             android:gravity="center_vertical">
 
         <RadioButton
-                android:id="@+id/xTimesPerMonthRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:id="@+id/xTimesPerMonthRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Radiobutton" />
 
         <EditText
                 android:id="@+id/xTimesPerMonthTextView"
@@ -129,7 +133,8 @@
         <RadioButton
             android:id="@+id/xTimesPerYDaysRadioButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:contentDescription="Radiobutton" />
 
         <EditText
             android:id="@+id/xTimesPerYDaysXTextView"
