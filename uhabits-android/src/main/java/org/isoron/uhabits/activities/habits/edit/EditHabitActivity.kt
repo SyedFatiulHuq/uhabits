@@ -20,6 +20,7 @@
 package org.isoron.uhabits.activities.habits.edit
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.os.Bundle
@@ -28,6 +29,7 @@ import android.text.Spanned
 import android.text.format.DateFormat
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -41,8 +43,11 @@ import org.isoron.uhabits.activities.AndroidThemeSwitcher
 import org.isoron.uhabits.activities.common.dialogs.ColorPickerDialogFactory
 import org.isoron.uhabits.activities.common.dialogs.FrequencyPickerDialog
 import org.isoron.uhabits.activities.common.dialogs.WeekdayPickerDialog
+import org.isoron.uhabits.activities.common.views.CustomButton
+import org.isoron.uhabits.activities.habits.list.ListHabitsActivity
 import org.isoron.uhabits.core.commands.CommandRunner
 import org.isoron.uhabits.core.commands.CreateHabitCommand
+import org.isoron.uhabits.core.commands.DeleteHabitsCommand
 import org.isoron.uhabits.core.commands.EditHabitCommand
 import org.isoron.uhabits.core.models.Frequency
 import org.isoron.uhabits.core.models.Habit
@@ -119,6 +124,7 @@ class EditHabitActivity : AppCompatActivity() {
             binding.targetInput.setText(habit.targetValue.toString())
         } else {
             habitType = HabitType.fromInt(intent.getIntExtra("habitType", HabitType.YES_NO.value))
+            binding.deleteOuterBox.visibility = View.GONE
         }
 
         if (state != null) {
@@ -256,6 +262,27 @@ class EditHabitActivity : AppCompatActivity() {
         for (fragment in supportFragmentManager.fragments) {
             (fragment as DialogFragment).dismiss()
         }
+
+        binding.deleteHabitButton.setText("Delete")
+        binding.deleteHabitButton.setOnCustomButtonClickListener(object : CustomButton.OnCustomButtonClickListener {
+            override fun onCustomButtonClick() {
+                Toast.makeText(this@EditHabitActivity, "Habit Deleted!", Toast.LENGTH_SHORT).show()
+                delete()
+            }
+        })
+    }
+
+    private fun delete(){
+        val component = (application as HabitsApplication).component
+        val habit = component.habitList.getById(habitId)!!
+        component.commandRunner.run(DeleteHabitsCommand(component.habitList, listOf(habit)))
+
+        // Close the current activity and return to the list
+        finish()
+
+        // Optionally ensure navigation to ListHabitsActivity if needed
+        val intent = Intent(this@EditHabitActivity, ListHabitsActivity::class.java)
+        startActivity(intent)
     }
 
     private fun save() {

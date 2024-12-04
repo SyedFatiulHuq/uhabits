@@ -265,6 +265,23 @@
                         android:hint="@string/example_notes" />
                 </LinearLayout>
             </FrameLayout>
+
+            <!-- Delete -->
+            <LinearLayout
+                android:id="@+id/deleteOuterBox"
+                style="@style/FormInnerBox">
+
+                <org.isoron.uhabits.activities.common.views.CustomButton
+                    android:id="@+id/deleteHabitButton"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+
+                    android:importantForAccessibility="yes"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
