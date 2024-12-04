@@ -43,7 +43,7 @@ import org.isoron.uhabits.activities.AndroidThemeSwitcher
 import org.isoron.uhabits.activities.common.dialogs.ColorPickerDialogFactory
 import org.isoron.uhabits.activities.common.dialogs.FrequencyPickerDialog
 import org.isoron.uhabits.activities.common.dialogs.WeekdayPickerDialog
-import org.isoron.uhabits.activities.common.views.CustomButton
+import org.isoron.uhabits.activities.common.views.AnimatingButton
 import org.isoron.uhabits.activities.habits.list.ListHabitsActivity
 import org.isoron.uhabits.core.commands.CommandRunner
 import org.isoron.uhabits.core.commands.CreateHabitCommand
@@ -264,7 +264,7 @@ class EditHabitActivity : AppCompatActivity() {
         }
 
         binding.deleteHabitButton.setText("Delete")
-        binding.deleteHabitButton.setOnCustomButtonClickListener(object : CustomButton.OnCustomButtonClickListener {
+        binding.deleteHabitButton.setOnCustomButtonClickListener(object : AnimatingButton.OnCustomButtonClickListener {
             override fun onCustomButtonClick() {
                 Toast.makeText(this@EditHabitActivity, "Habit Deleted!", Toast.LENGTH_SHORT).show()
                 delete()

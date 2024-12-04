@@ -271,7 +271,7 @@
                 android:id="@+id/deleteOuterBox"
                 style="@style/FormInnerBox">
 
-                <org.isoron.uhabits.activities.common.views.CustomButton
+                <org.isoron.uhabits.activities.common.views.AnimatingButton
                     android:id="@+id/deleteHabitButton"
                     android:layout_width="150dp"
                     android:layout_height="50dp"

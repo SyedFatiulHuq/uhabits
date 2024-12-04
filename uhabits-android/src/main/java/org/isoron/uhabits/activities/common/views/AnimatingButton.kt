@@ -13,13 +13,13 @@ import android.view.ViewConfiguration
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
 
-class CustomButton : View {
+class AnimatingButton : View {
     interface OnCustomButtonClickListener {
         fun onCustomButtonClick()
     }
 
     private var paint: Paint = Paint()
-    private var buttonText : String = "Del"
+    private var buttonText : String = ""
     private var clickListener: OnCustomButtonClickListener? = null
     private var isLongPress: Boolean = false
 
@@ -28,6 +28,9 @@ class CustomButton : View {
     private var longPressRunnable: Runnable? = null
     private var scaleFactor: Float = 1f
     private var buttonColor: Int = Color.YELLOW
+
+    private var scaleAnimator: ValueAnimator? = null
+    private var colorAnimator: ValueAnimator? = null
 
     fun setOnCustomButtonClickListener(listener: OnCustomButtonClickListener?) {
         this.clickListener = listener
@@ -114,8 +117,12 @@ class CustomButton : View {
     }
 
     private fun startScaleAndColorAnimation() {
+        // Cancel any running animations
+        scaleAnimator?.cancel()
+        colorAnimator?.cancel()
+
         // Scale animation
-        val scaleAnimator = ValueAnimator.ofFloat(1f, 0.8f).apply {
+        scaleAnimator = ValueAnimator.ofFloat(1f, 0.8f).apply {
             duration = longPressTimeout
             addUpdateListener {
                 scaleFactor = it.animatedValue as Float
@@ -124,7 +131,7 @@ class CustomButton : View {
         }
 
         // Color animation
-        val colorAnimator = ValueAnimator.ofArgb(Color.YELLOW, Color.RED).apply {
+        colorAnimator = ValueAnimator.ofArgb(Color.YELLOW, Color.RED).apply {
             duration = longPressTimeout
             addUpdateListener {
                 buttonColor = it.animatedValue as Int
@@ -133,13 +140,17 @@ class CustomButton : View {
         }
 
         // Start both animations
-        scaleAnimator.start()
-        colorAnimator.start()
+        scaleAnimator?.start()
+        colorAnimator?.start()
     }
 
     private fun resetScaleAndColorAnimation() {
+        // Cancel any running animations
+        scaleAnimator?.cancel()
+        colorAnimator?.cancel()
+
         // Reset scale factor
-        val scaleAnimator = ValueAnimator.ofFloat(scaleFactor, 1f).apply {
+        scaleAnimator = ValueAnimator.ofFloat(scaleFactor, 1f).apply {
             duration = 200 // Quick reset
             addUpdateListener {
                 scaleFactor = it.animatedValue as Float
@@ -148,7 +159,7 @@ class CustomButton : View {
         }
 
         // Reset color
-        val colorAnimator = ValueAnimator.ofArgb(buttonColor, Color.YELLOW).apply {
+        colorAnimator = ValueAnimator.ofArgb(buttonColor, Color.YELLOW).apply {
             duration = 200 // Quick reset
             addUpdateListener {
                 buttonColor = it.animatedValue as Int
@@ -157,8 +168,8 @@ class CustomButton : View {
         }
 
         // Start both reset animations
-        scaleAnimator.start()
-        colorAnimator.start()
+        scaleAnimator?.start()
+        colorAnimator?.start()
     }
 
     override fun performClick(): Boolean {
